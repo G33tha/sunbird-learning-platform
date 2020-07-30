@@ -17,3 +17,5 @@ dial_home: /home/{{learner_user}}/platform/dial/sunbird-dial-service
 process_home: ""
 app_home: "{{ dial_home }}"
 process_args: -- -cp '{{ app_home }}/lib/*' {{ service_args }} play.core.server.ProdServerStart {{ app_home }}
+redis_port: 6379
+dial_es_index_host: "{{ groups['composite-search-cluster']|join(':9200,')}}:9200"
