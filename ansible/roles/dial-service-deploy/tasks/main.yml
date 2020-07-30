@@ -5,6 +5,21 @@
     name: unzip
     state: present
 
+- name: Setup dial as service
+  become: yes
+  become_user: learning
+  vars:
+    description: Sunbird dial service
+    script_name: "sunbird-dial-service"
+    script_dir: "{{ dial_service_path }}"
+    grep_key: play.core.server.ProdServerStart
+    process: "/usr/bin/java"
+    service_args: "-Dconfig.file={{ dial_root }}/dial-service.conf"
+    process_home: ""
+    app_home: "{{ dial_home }}"
+    process_args: -- -cp '{{ app_home }}/lib/*' {{ service_args }} play.core.server.ProdServerStart {{ app_home }}
+  template: src=servicify-process.j2 dest={{ dial_service_path }}/{{ script_name }} mode=755 owner={{ learner_user }} group={{ learner_user }}
+
 - name: Status of the dial service
   become: yes
   become_user: learning
@@ -21,21 +36,6 @@
   when: "dial_status.stdout.find('RUNNING') != -1"
   async: 10
   poll: 5
-
-- name: Setup dial as service
-  become: yes
-  become_user: learning
-  vars:
-    description: Sunbird dial service
-    script_name: "sunbird-dial-service"
-    script_dir: "{{ dial_service_path }}"
-    grep_key: play.core.server.ProdServerStart
-    process: "/usr/bin/java"
-    service_args: "-Dconfig.file={{ dial_root }}/dial-service.conf"
-    process_home: ""
-    app_home: "{{ dial_home }}"
-    process_args: -- -cp '{{ app_home }}/lib/*' {{ service_args }} play.core.server.ProdServerStart {{ app_home }}
-  template: src=servicify-process.j2 dest={{ dial_service_path }}/{{ script_name }} mode=755 owner={{ learner_user }} group={{ learner_user }}
 
 - name: Copy the configuration files
   become: yes
