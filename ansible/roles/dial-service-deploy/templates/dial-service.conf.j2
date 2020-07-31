@@ -124,7 +124,7 @@ search.fields.mode_collection=["identifier","name","objectType","contentType","m
 search.batch.size=500
 search.connection.timeout=30
 
-platform-api-url="http://localhost:8080/learning-service"
+platform-api-url="http://{{learningservice_ip}}:8080/learning-service"
 language.map={"Hindi":"hi", "English":"en", "Telugu":"te", "Kannada":"ka", "Tamil":"ta", "Assamese":"as", "Bengali":"bn", "Bodo":"bo", "Gujarati":"gu", "Konkani":"ko", "Malayalam":"ml", "Marathi":"mr", "Nepali":"ne", "Odia":"or", "Punjabi":"pj", "Sanskrit":"sk"}
 #Top N Config for Search Telemetry
 telemetry.search.topn=5
@@ -169,7 +169,7 @@ dialcode.large.prime_number=1679979167
 
 # DialCode Link API Config
 learning.content.link_dialcode_validation=true
-dialcode.api.search.url="http://localhost:8080/learning-service/v3/dialcode/search"
+dialcode.api.search.url="http://{{learningservice_ip}}:8080/learning-service/v3/dialcode/search"
 dialcode.api.authorization=auth_key
 
 # Redis Configuration
