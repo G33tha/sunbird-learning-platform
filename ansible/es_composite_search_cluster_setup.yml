@@ -23,7 +23,7 @@
   roles:
     - { role: es6, 
         es_config: {
-          cluster.name: "elasticsearch-composite-search",
+          cluster.name: "elasticsearch-compes-restore",
           discovery.zen.ping.unicast.hosts: "{{ groups['composite-search-cluster'] }}",
           http.port: 9200,
           transport.tcp.port: 9300,
@@ -32,5 +32,5 @@
           bootstrap.memory_lock: true,
         },
         es_etc_discovery_zen_ping_unicast_hosts: "{{ groups['composite-search-cluster'] }}",
-        es_etc_cluster_name: "elasticsearch-composite-search"
+        es_etc_cluster_name: "elasticsearch-compes-restore"
       }
